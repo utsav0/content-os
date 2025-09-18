@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags Entry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tags_entry.css') }}">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-caption {
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <section class="container__section section--left" id="post-section">
+            {% if post.media_url and not post.media_url.startswith('http') %}
+            {% set extension = post.media_url.split('.')[-1].lower() %}
+            {% if extension in ['jpg', 'jpeg', 'png', 'gif'] %}
+            <img src="{{ url_for('static', filename='media/' + post.media_url) }}" alt="Post Media"
+                class="post-media nice-box">
+            {% elif extension in ['mp4', 'webm'] %}
+            <video controls class="post-media nice-box">
+                <source src="{{ url_for('static', filename='media/' + post.media_url) }}" type="video/{{ extension }}">
+                Your browser does not support the video tag.
+            </video>
+            {% endif %}
+            {% endif %}
+            <div class="post-caption">
+                <strong>Post ID: {{ post.post_id }}</strong>
+                <p>{{ post.caption }}</p>
+            </div>
+        </section>
+        <div class="form-group interest-container vertical-flex">
+            <label for="tag-input">Interests <span class="note"></span></label>
+            <div class="tag-container" id="tag-container">
+                <input type="text" class="tag-input" id="tag-input" placeholder="Topics..." autocomplete="off" />
+                <div class="suggestions-container" id="suggestions-container"></div>
+            </div>
+            <input type="hidden" name="interests" id="tag-input-hidden">
+
+        </div>
+        <section class="container__section section--right">
+            <button id="next-post" class="btn btn--primary">Next Post</button>
+        </section>
+    </main><script>
+    // Declare globally so it's visible to all scripts
+    let interestsManager;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        interestsManager = createInterestsManager();
+        interestsManager.init();
+    });
+
+    function createInterestsManager() {
+        let interests = [];
+        const elements = {
+            tagInput: document.getElementById('tag-input'),
+            tagContainer: document.getElementById('tag-container'),
+            hiddenInput: document.getElementById('tag-input-hidden'),
+        };
+
+        function init() {
+            if (!validateElements(elements)) {
+                console.error("Interests UI elements not found.");
+                return;
+            }
+            setupEventListeners();
+        }
+
+        function validateElements(elements) {
+            return Object.values(elements).every(el => !!el);
+        }
+
+        function setupEventListeners() {
+            elements.tagContainer.addEventListener('click', () => elements.tagInput.focus());
+            elements.tagInput.addEventListener('keydown', handleTagInput);
+        }
+
+        function handleTagInput(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (e.ctrlKey) {
+                    document.getElementById('next-post').click();
+                } else {
+                    const value = elements.tagInput.value.trim();
+                    if (value) {
+                        addInterest(value);
+                        elements.tagInput.value = '';
+                        suggestionsContainer.innerHTML = '';
+                    }
+                }
+            }
+        }
+
+        function addInterest(tagText) {
+            const formattedTag = tagText.charAt(0).toUpperCase() + tagText.slice(1).toLowerCase();
+            if (interests.includes(formattedTag)) return;
+            if (formattedTag) {
+                interests.push(formattedTag);
+                addTagElement(formattedTag);
+                updateUI();
+            }
+        }
+
+        function removeInterest(tagText, tagEle) {
+            interests = interests.filter(t => t !== tagText);
+            if (tagEle) tagEle.remove();
+            updateUI();
+        }
+
+        function addTagElement(tagText) {
+            const tagEle = document.createElement('span');
+            tagEle.className = 'tag';
+            tagEle.textContent = tagText;
+
+            const removeBtn = document.createElement('span');
+            removeBtn.className = 'remove-tag';
+            removeBtn.textContent = '×';
+            removeBtn.onclick = (e) => {
+                e.stopPropagation();
+                removeInterest(tagText, tagEle);
+            };
+
+            tagEle.appendChild(removeBtn);
+            elements.tagContainer.insertBefore(tagEle, elements.tagInput);
+        }
+
+        function updateUI() {
+            elements.hiddenInput.value = interests.join(',');
+            elements.tagInput.placeholder = interests.length > 0 ? '' : 'Nature, Music, Cat...';
+        }
+
+        function getInterests() {
+            return interests;
+        }
+
+        function reset() {
+            interests = [];
+            const tagElements = elements.tagContainer.querySelectorAll('.tag');
+            tagElements.forEach(el => el.remove());
+            updateUI();
+        }
+
+        return { init, getInterests, reset, addInterest };
+    }
+</script>
+
+
+
+
+    <script>
+        let currentPostIndex = 0;
+        let allTopics = [];
+
+        function fetchTopics() {
+            fetch('/api/topics')
+                .then(response => response.json())
+                .then(data => {
+                    allTopics = data;
+                })
+                .catch(error => console.error('Error fetching topics:', error));
+        }
+
+        document.getElementById('next-post').addEventListener('click', () => {
+            const interests = interestsManager.getInterests();
+            currentPostIndex++;
+
+            fetch('/api/next-post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    interests: interests,
+                    currentPostIndex: currentPostIndex
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                } else {
+                    updatePost(data);
+                    interestsManager.reset(); // Reset interests on the frontend
+                    fetchTopics(); // Refresh topics for the next post
+                }
+            });
+        });
+
+        function updatePost(post) {
+            const postSection = document.getElementById('post-section');
+            let mediaHtml = '';
+            if (post.media_url && !post.media_url.startsWith('http')) {
+                const extension = post.media_url.split('.').pop().toLowerCase();
+                const mediaUrl = `/static/media/${post.media_url}`;
+                if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+                    mediaHtml = `<img src="${mediaUrl}" alt="Post Media" class="post-media nice-box">`;
+                } else if (['mp4', 'webm'].includes(extension)) {
+                    mediaHtml = `
+                        <video controls class="post-media nice-box">
+                            <source src="${mediaUrl}" type="video/${extension}">
+                            Your browser does not support the video tag.
+                        </video>
+                    `;
+                }
+            }
+
+            postSection.innerHTML = `
+                ${mediaHtml}
+                <div class="post-caption">
+                    <strong>Post ID: ${post.post_id}</strong>
+                    <p>${post.caption}</p>
+                </div>
+            `;
+        }
+
+        // --- Suggestions Logic ---
+        const tagInput = document.getElementById('tag-input');
+        const suggestionsContainer = document.getElementById('suggestions-container');
+
+        tagInput.addEventListener('input', () => {
+            const inputText = tagInput.value.toLowerCase();
+            if (inputText.length === 0) {
+                suggestionsContainer.innerHTML = '';
+                return;
+            }
+
+            const matchingTopics = allTopics.filter(topic => 
+                topic.toLowerCase().includes(inputText)
+            );
+
+            suggestionsContainer.innerHTML = matchingTopics.map(topic => 
+                `<div class="suggestion-item">${topic}</div>`
+            ).join('');
+        });
+
+        suggestionsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('suggestion-item')) {
+                interestsManager.addInterest(e.target.textContent);
+                tagInput.value = '';
+                suggestionsContainer.innerHTML = '';
+            }
+        });
+
+        // Initial fetch of topics
+        fetchTopics();
+    </script>
+</body>
+
+</html>

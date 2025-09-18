@@ -1,0 +1,56 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    font-size: 0.9rem;
+}
+
+.container__section {
+    padding: var(--commmon-spacing);
+    display: flex;
+    flex-direction: column;
+    gap: var(--commmon-spacing);
+}
+
+.post-media {
+    width: 55%;
+    min-height: 200px;
+    cursor: pointer;
+    object-fit: contain;
+    align-self: center;
+}
+
+.post-caption {
+    font-size: 0.85rem;
+    white-space: pre-line;
+}
+
+/* ======== Section Right ======== */
+
+.section--right {
+    align-items: start;
+}
+
+.post__stats {
+    display: grid;
+    gap: calc(var(--commmon-spacing) / 2);
+}
+
+.post__stat {
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    background-color: color-mix(in hsl, var(--clr--accent), transparent 90%);
+    border: 2px solid color-mix(in hsl, var(--clr--accent), transparent 80%);
+    width: 100%;
+    display: flex;
+    padding: 3px 10px;
+}
+
+.post__stat-label {
+    font-weight: 600;
+    margin-right: 1ch;
+}
+
+a.see-live-post {
+    align-self: stretch;
+    display: grid;
+}

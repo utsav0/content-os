@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+</head>
+
+<body>
+    {% if post %}
+    <main class="container">
+        <section class="container__section section--left">
+            {% if post.media_url and not post.media_url.startswith('http') %}
+                {% set extension = post.media_url.split('.')[-1].lower() %}
+                {% if extension in ['jpg', 'jpeg', 'png', 'gif'] %}
+                    <img src="{{ url_for('static', filename='media/' + post.media_url) }}" alt="Post Media" class="post-media nice-box">
+                {% elif extension in ['mp4', 'webm'] %}
+                    <video controls class="post-media nice-box">
+                        <source src="{{ url_for('static', filename='media/' + post.media_url) }}" type="video/{{ extension }}">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+            {% endif %}
+            <div class="post-caption">
+                <p>
+                    {{ post.caption}}
+                </p>
+            </div>
+        </section>
+        <section class="container__section section--right">
+            <div class="post__stats">
+                <h2>Stats:</h2>
+                <div class="post__stat">
+                    <p class="post__stat-label">ID:</p>
+                    <p class="post__stat-value">{{ post.post_id }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Date/Time:</p>
+                    <p class="post__stat-value">{{ post.post_datetime.strftime('%b %d, %Y, %I:%M %p') }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Impressions:</p>
+                    <p class="post__stat-value">{{ post.impressions }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Unique Impressions:</p>
+                    <p class="post__stat-value">{{ post.members_reached }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Likes:</p>
+                    <p class="post__stat-value">{{ post.likes }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Total Clicks:</p>
+                    <p class="post__stat-value">{{ post.total_clicks }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Main Ebook Clicks:</p>
+                    <p class="post__stat-value">{{ post.main_ebook_clicks }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Lead Magnet Clicks:</p>
+                    <p class="post__stat-value">{{ post.lead_magnet_clicks }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Comments:</p>
+                    <p class="post__stat-value">{{ post.comments }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Profile View:</p>
+                    <p class="post__stat-value">{{ post.profile_viewers }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Followers:</p>
+                    <p class="post__stat-value">{{ post.followers_gained }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Reactions:</p>
+                    <p class="post__stat-value">{{ post.reactions }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Reposts:</p>
+                    <p class="post__stat-value">{{ post.reposts }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Saves:</p>
+                    <p class="post__stat-value">{{ post.saves }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">Sends:</p>
+                    <p class="post__stat-value">{{ post.sends }}</p>
+                </div>
+            </div>
+            <a href="{{ post.post_url }}" target="_blank"
+                class="see-live-post">
+                <button class="btn btn--primary">See Live Post</button>
+            </a>
+        </section>
+    </main>
+    {% else %}
+        <h1>Post not found.</h1>
+    {% endif %}
+</body>
+
+</html>

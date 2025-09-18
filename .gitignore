@@ -1,0 +1,9 @@
+# Ignore environment files
+.env
+
+# Ignore raw data directory
+raw-data/
+
+# Ignore media inside static
+static/media/
+
