@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+    <!-- Just for live server -->
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+
+    <script src="https://kit.fontawesome.com/6bf5f276c4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <div class="search-bar nice-box">
+            <input type="text" name="search" id="search-input" class="search-bar__input" placeholder="Search..."
+                autocomplete="off">
+            <a href="#" class="search-bar__icon-link centered-grid" aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass search-bar__icon"></i>
+            </a>
+        </div>
+        <section class="page-links">
+            <div class="page-links__item page-links__item--posts box">
+                <h2 class="page-links__title">Posts</h2>
+                <div class="page-links__desc">See all the posts, filter them with custom criteria and more.</div>
+                <a href="/posts">
+                    <button class="page-links__button btn btn--primary">
+                        Go to page
+                    </button>
+                </a>
+            </div>
+
+            <div class="page-links__item page-links__item--topics box">
+                <h2 class="page-links__title">Topics</h2>
+                <div class="page-links__desc">See all the topics, filter them with custom criteria and more.</div>
+                <a href="/topics">
+                    <button class="page-links__button btn btn--primary">
+                        Go to page
+                    </button>
+                </a>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>
