@@ -23,6 +23,7 @@
             <a href="#" class="search-bar__icon-link centered-grid" aria-label="Search">
                 <i class="fa-solid fa-magnifying-glass search-bar__icon"></i>
             </a>
+            <div id="search-suggestions" class="search-bar__search-suggestions"></div>
         </div>
         <section class="page-links">
             <div class="page-links__item page-links__item--posts box">
@@ -47,6 +48,7 @@
         </section>
 
     </main>
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 
 </html>

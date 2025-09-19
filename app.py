@@ -65,13 +65,49 @@ def show_post_details(post_id):
             cursor.execute("SELECT * FROM posts WHERE post_id = %s", (post_id,))
             post = cursor.fetchone()
             if post:
-                return render_template("post_details.html", post=post)
+                return render_template("individual_post.html", post=post)
             else:
                 return "Post not found", 404
     except mysql.connector.Error as err:
         app.logger.error(f"Database error: {err}")
         return "Database error", 500
+    
 
+@app.route("/api/search-suggestions")
+def search_suggestions():
+    query = request.args.get("query", "")
+    if not query:
+        return jsonify({"topics": [], "posts": []})
+
+    try:
+        with get_db_connection() as conn:
+            cursor = conn.cursor(dictionary=True)
+
+            # Search for topics
+            cursor.execute("SELECT id, name FROM topics WHERE name LIKE %s", (f"%{query}%",))
+            topics = cursor.fetchall()
+
+            # Search for posts
+            cursor.execute(
+                "SELECT p.post_id, p.caption FROM posts p "
+                "LEFT JOIN topic_posts tp ON p.post_id = tp.post_id "
+                "LEFT JOIN topics t ON tp.topic_id = t.id "
+                "WHERE p.caption LIKE %s OR t.name LIKE %s OR p.post_id LIKE %s",
+                (f"%{query}%", f"%{query}%", f"%{query}%"),
+            )
+            posts = cursor.fetchall()
+            
+            topics_suggestions = [{"id": topic['id'], "name": topic['name']} for topic in topics]
+            posts_suggestions = [{"post_id": str(post['post_id']), "caption": post['caption']} for post in posts]
+
+            return jsonify({
+                "topics": topics_suggestions,
+                "posts": posts_suggestions
+            })
+    except mysql.connector.Error as err:
+        app.logger.error(f"Database error: {err}")
+        return jsonify({"error": "Database error"}), 500
+    
 @app.errorhandler(404)
 def not_found(e):
     return jsonify({"error": "Not found"}), 404

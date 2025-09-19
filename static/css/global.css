@@ -14,7 +14,9 @@
      --truncate-line: 3;
      --commmon-spacing: 1rem;
      --clr-link: hsl(231, 95%, 59%);
-     --clr--accent: #09a1d9;
+     --clr-accent: #09a1d9;
+     --clr-topic: #f4d03f;
+     --clr-post: #8cc640;
  }
 
  body {
@@ -74,7 +76,7 @@
  }
 
  .btn--primary {
-     --clr-btn-bg: var(--clr--accent);
+     --clr-btn-bg: var(--clr-accent);
      background-color: var(--clr-btn-bg);
  }
 

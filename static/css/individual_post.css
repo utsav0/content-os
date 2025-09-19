@@ -38,8 +38,8 @@
 .post__stat {
     border-radius: 0.5rem;
     font-size: 0.8rem;
-    background-color: color-mix(in hsl, var(--clr--accent), transparent 90%);
-    border: 2px solid color-mix(in hsl, var(--clr--accent), transparent 80%);
+    background-color: color-mix(in hsl, var(--clr-accent), transparent 90%);
+    border: 2px solid color-mix(in hsl, var(--clr-accent), transparent 80%);
     width: 100%;
     display: flex;
     padding: 3px 10px;
