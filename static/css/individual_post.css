@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: var(--clr-p);
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 300px;
@@ -9,6 +14,28 @@
     display: flex;
     flex-direction: column;
     gap: var(--commmon-spacing);
+}
+
+.extra-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.extra-details__item {
+    font-size: 0.85rem;
+    padding: 2px 8px;
+    border-radius: 30rem;
+    transition: background-color 0.3s ease;
+    border: 2px solid var(--clr-p);
+    display: flex;
+    gap: 1ch;
+    align-items: center;
+
+}
+
+.extra-details__item:hover {
+    background-color: color-mix(in hsl, var(--clr-p), transparent 80%);
 }
 
 .post-media {
@@ -53,4 +80,58 @@
 a.see-live-post {
     align-self: stretch;
     display: grid;
+}
+
+/* ======== Similar post section ======== */
+.similar-posts-container{
+    display: grid;
+    justify-items: center;
+    gap: var(--commmon-spacing);
+}
+
+.similar-posts-container h2 {
+    border-bottom: 2px solid;
+    width: fit-content;
+    padding-inline: 14px;
+    padding-bottom: 0.4rem;
+}
+
+.similar-posts{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-auto-flow: column;
+    overflow-x: scroll;
+    max-width: 95vw;
+    gap: var(--commmon-spacing);
+    padding: var(--commmon-spacing);
+    scroll-behavior: smooth;
+}
+
+.similar-posts__card{
+    grid-row: 1 / -1;
+    display: grid;
+    align-content: space-between;
+    width: 320px;
+    background-color: var(--clr-bg2);
+    border-radius: 20px;
+    padding: var(--commmon-spacing);   
+    gap: var(--commmon-spacing);
+    font-size: 0.85em;
+}
+
+.similar-posts__media{
+    width: 100%;
+    min-height: 300px;
+    border-radius: 20px;
+    background-color: var(--clr-bg);
+}
+
+.similar-posts__stats{
+    display: flex;
+    gap: var(--commmon-spacing);
+    justify-content: space-around;
+}
+
+.similar-posts__stats i{
+    color: color-mix(in hsl, var(--clr-accent), transparent 50%);
 }

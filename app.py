@@ -44,6 +44,10 @@ def home():
 def post_data():
     return render_template("index.html")
 
+@app.route("/posts")
+def posts():
+    return render_template("posts.html")
+
 @app.route("/api/posts/ids")
 def get_post_ids():
     try:
@@ -62,12 +66,59 @@ def show_post_details(post_id):
     try:
         with get_db_connection() as conn:
             cursor = conn.cursor(dictionary=True)
+            
+            # Fetch the main post
             cursor.execute("SELECT * FROM posts WHERE post_id = %s", (post_id,))
             post = cursor.fetchone()
-            if post:
-                return render_template("individual_post.html", post=post)
-            else:
+
+            if not post:
                 return "Post not found", 404
+
+            if post and post.get('post_datetime'):
+                post['post_datetime'] = post['post_datetime'].strftime('%d %B %Y')
+
+            # Fetch topics for the current post
+            cursor.execute("""
+                SELECT t.id, t.name
+                FROM topics t
+                JOIN topic_posts tp ON t.id = tp.topic_id
+                WHERE tp.post_id = %s
+            """, (post_id,))
+            topics = cursor.fetchall()
+
+            # Fetch similar posts
+            cursor.execute("""
+                SELECT p.post_id, p.media_url, p.caption, p.impressions, p.likes, p.comments, p.reposts
+                FROM posts p
+                JOIN topic_posts tp ON p.post_id = tp.post_id
+                WHERE tp.topic_id IN (
+                    SELECT topic_id FROM topic_posts WHERE post_id = %s
+                ) AND p.post_id != %s
+                GROUP BY p.post_id
+                ORDER BY p.post_datetime DESC
+                LIMIT 10
+            """, (post_id, post_id))
+            similar_posts = cursor.fetchall()
+
+            # Fetch the most recent post date among similar posts
+            most_recent_post_info = None
+            if similar_posts:
+                cursor.execute("""
+                    SELECT p.post_id, p.post_datetime
+                    FROM posts p
+                    JOIN topic_posts tp ON p.post_id = tp.post_id
+                    WHERE tp.topic_id IN (
+                        SELECT topic_id FROM topic_posts WHERE post_id = %s
+                    )
+                    ORDER BY p.post_datetime DESC
+                    LIMIT 1
+                """, (post_id,))
+                most_recent_post_info = cursor.fetchone()
+                if most_recent_post_info and most_recent_post_info.get('post_datetime'):
+                    most_recent_post_info['post_datetime'] = most_recent_post_info['post_datetime'].strftime('%d %B %Y')
+
+            return render_template('individual_post.html', post=post, topics=topics, similar_posts=similar_posts, most_recent_post_info=most_recent_post_info)
+
     except mysql.connector.Error as err:
         app.logger.error(f"Database error: {err}")
         return "Database error", 500

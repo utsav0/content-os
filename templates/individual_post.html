@@ -7,6 +7,7 @@
     <title>Post Details</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/individual_post.css') }}">
+    <script src="https://kit.fontawesome.com/6bf5f276c4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -14,16 +15,29 @@
     <main class="container">
         <section class="container__section section--left">
             {% if post.media_url and not post.media_url.startswith('http') %}
-                {% set extension = post.media_url.split('.')[-1].lower() %}
-                {% if extension in ['jpg', 'jpeg', 'png', 'gif'] %}
-                    <img src="{{ url_for('static', filename='media/' + post.media_url) }}" alt="Post Media" class="post-media nice-box">
-                {% elif extension in ['mp4', 'webm'] %}
-                    <video controls class="post-media nice-box">
-                        <source src="{{ url_for('static', filename='media/' + post.media_url) }}" type="video/{{ extension }}">
-                        Your browser does not support the video tag.
-                    </video>
-                {% endif %}
+            {% set extension = post.media_url.split('.')[-1].lower() %}
+            {% if extension in ['jpg', 'jpeg', 'png', 'gif'] %}
+            <img src="{{ url_for('static', filename='media/' + post.media_url) }}" alt="Post Media"
+                class="post-media nice-box">
+            {% elif extension in ['mp4', 'webm'] %}
+            <video controls class="post-media nice-box">
+                <source src="{{ url_for('static', filename='media/' + post.media_url) }}" type="video/{{ extension }}">
+                Your browser does not support the video tag.
+            </video>
             {% endif %}
+            {% endif %}
+
+            <div class="extra-details">
+                {% for topic in topics %}
+                <a href="/topic/{{ topic.id }}" class="extra-details__item extra-details__item--topic"><i
+                        class="fa-solid fa-tags"></i>{{ topic.name }}</a>
+                {% endfor %}
+                {% if most_recent_post_info %}
+                <a href="/post/{{ most_recent_post_info.post_id }}"
+                    class="extra-details__item extra-details__item--last-posted"><i class="fa-solid fa-calendar"></i>{{
+                    most_recent_post_info.post_datetime }}</a>
+                {% endif %}
+            </div>
             <div class="post-caption">
                 <p>
                     {{ post.caption}}
@@ -39,7 +53,7 @@
                 </div>
                 <div class="post__stat">
                     <p class="post__stat-label">Date/Time:</p>
-                    <p class="post__stat-value">{{ post.post_datetime.strftime('%b %d, %Y, %I:%M %p') }}</p>
+                    <p class="post__stat-value">{{ post.post_datetime }}</p>
                 </div>
                 <div class="post__stat">
                     <p class="post__stat-label">Impressions:</p>
@@ -94,15 +108,48 @@
                     <p class="post__stat-value">{{ post.sends }}</p>
                 </div>
             </div>
-            <a href="{{ post.post_url }}" target="_blank"
-                class="see-live-post">
+            <a href="{{ post.post_url }}" target="_blank" class="see-live-post">
                 <button class="btn btn--primary">See Live Post</button>
             </a>
         </section>
     </main>
+
+    <section class="similar-posts-container">
+        <h2>Similar Posts</h2>
+        <div class="similar-posts">
+            {% for similar_post in similar_posts %}
+            <a href="{{ url_for('show_post_details', post_id=similar_post.post_id) }}" class="similar-posts__card">
+                {% if similar_post.media_url and not similar_post.media_url.startswith('http') %}
+                {% set extension = similar_post.media_url.split('.')[-1].lower() %}
+                {% if extension in ['jpg', 'jpeg', 'png', 'gif'] %}
+                <img src="{{ url_for('static', filename='media/' + similar_post.media_url) }}" alt="Similar post media"
+                    class="similar-posts__media centered-grid">
+                {% elif extension in ['mp4', 'webm'] %}
+                <video controls class="similar-posts__media centered-grid">
+                    <source src="{{ url_for('static', filename='media/' + similar_post.media_url) }}"
+                        type="video/{{ extension }}">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+                {% endif %}
+                <div class="similar-posts__caption">
+                    <p>{{ similar_post.caption[:100] }}...</p>
+                </div>
+                <div class="similar-posts__stats">
+                    <span><i class="fas fa-eye"></i> {{ similar_post.impressions }}</span>
+                    <span><i class="fas fa-heart"></i> {{ similar_post.likes }}</span>
+                    <span><i class="fas fa-comment"></i> {{ similar_post.comments }}</span>
+                    <span><i class="fas fa-retweet"></i> {{ similar_post.reposts }}</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
     {% else %}
-        <h1>Post not found.</h1>
+    <h1>Post not found.</h1>
     {% endif %}
+
+    <script src="{{ url_for('static', filename='js/individual_post.js') }}"></script>
 </body>
 
 </html>
