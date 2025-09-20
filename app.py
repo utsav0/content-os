@@ -46,7 +46,18 @@ def post_data():
 
 @app.route("/posts")
 def posts():
-    return render_template("posts.html")
+    try:
+        with get_db_connection() as conn:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT post_id, caption, impressions, likes, comments, post_datetime FROM posts ORDER BY post_datetime DESC LIMIT 20")
+            initial_posts = cursor.fetchall()
+            for post in initial_posts:
+                if post.get('post_datetime'):
+                    post['post_datetime'] = post['post_datetime'].strftime('%d %B %Y')
+            return render_template("posts.html", posts=initial_posts)
+    except mysql.connector.Error as err:
+        app.logger.error(f"Database error: {err}")
+        return "Database error", 500
 
 @app.route("/api/posts/ids")
 def get_post_ids():
@@ -56,6 +67,79 @@ def get_post_ids():
             cursor.execute("SELECT post_id FROM posts")
             ids = [str(row[0]) for row in cursor.fetchall()]
             return jsonify(ids)
+    except mysql.connector.Error as err:
+        app.logger.error(f"Database error: {err}")
+        return jsonify({"error": "Database error"}), 500
+
+@app.route("/api/posts")
+def api_posts():
+    try:
+        offset = int(request.args.get("offset", 0))
+        limit = int(request.args.get("limit", 20))
+        sort_by = request.args.get("sort_by", "post_datetime")
+        sort_order = request.args.get("sort_order", "desc").upper()
+        date_from = request.args.get("date_from")
+        date_to = request.args.get("date_to")
+        likes_min = request.args.get("likes_min")
+        likes_max = request.args.get("likes_max")
+        impressions_min = request.args.get("impressions_min")
+        impressions_max = request.args.get("impressions_max")
+        comments_min = request.args.get("comments_min")
+        comments_max = request.args.get("comments_max")
+
+        # Whitelist to prevent injection
+        valid_sort_columns = ["post_datetime", "likes", "comments", "impressions"]
+        if sort_by not in valid_sort_columns:
+            sort_by = "post_datetime"
+        if sort_order not in ["ASC", "DESC"]:
+            sort_order = "DESC"
+
+        query = """SELECT post_id, caption, impressions, likes, comments, post_datetime
+                   FROM posts WHERE 1=1"""
+        params = []
+
+        if date_from:
+            query += " AND post_datetime >= %s"
+            params.append(date_from)
+        if date_to:
+            query += " AND post_datetime <= %s"
+            params.append(date_to)
+        if likes_min:
+            query += " AND likes >= %s"
+            params.append(likes_min)
+        if likes_max:
+            query += " AND likes <= %s"
+            params.append(likes_max)
+        if impressions_min:
+            query += " AND impressions >= %s"
+            params.append(impressions_min)
+        if impressions_max:
+            query += " AND impressions <= %s"
+            params.append(impressions_max)
+        if comments_min:
+            query += " AND comments >= %s"
+            params.append(comments_min)
+        if comments_max:
+            query += " AND comments <= %s"
+            params.append(comments_max)
+
+        query += f" ORDER BY {sort_by} {sort_order} LIMIT %s OFFSET %s"
+        params.extend([limit, offset])
+
+        with get_db_connection() as conn:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(query, params)
+            posts = cursor.fetchall()
+
+            for post in posts:
+                if "post_id" in post and post["post_id"] is not None:
+                    post["post_id"] = str(post["post_id"])
+
+                if post.get("post_datetime"):
+                    post["post_datetime"] = post["post_datetime"].strftime("%d %B %Y")
+
+            return jsonify(posts)
+
     except mysql.connector.Error as err:
         app.logger.error(f"Database error: {err}")
         return jsonify({"error": "Database error"}), 500

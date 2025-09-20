@@ -10,10 +10,10 @@ a {
 }
 
 .container__section {
-    padding: var(--commmon-spacing);
+    padding: var(--common-spacing);
     display: flex;
     flex-direction: column;
-    gap: var(--commmon-spacing);
+    gap: var(--common-spacing);
 }
 
 .extra-details {
@@ -59,7 +59,7 @@ a {
 
 .post__stats {
     display: grid;
-    gap: calc(var(--commmon-spacing) / 2);
+    gap: var(--common-spacing-half);
 }
 
 .post__stat {
@@ -86,7 +86,7 @@ a.see-live-post {
 .similar-posts-container{
     display: grid;
     justify-items: center;
-    gap: var(--commmon-spacing);
+    gap: var(--common-spacing);
 }
 
 .similar-posts-container h2 {
@@ -102,8 +102,8 @@ a.see-live-post {
     grid-auto-flow: column;
     overflow-x: scroll;
     max-width: 95vw;
-    gap: var(--commmon-spacing);
-    padding: var(--commmon-spacing);
+    gap: var(--common-spacing);
+    padding: var(--common-spacing);
     scroll-behavior: smooth;
 }
 
@@ -114,8 +114,8 @@ a.see-live-post {
     width: 320px;
     background-color: var(--clr-bg2);
     border-radius: 20px;
-    padding: var(--commmon-spacing);   
-    gap: var(--commmon-spacing);
+    padding: var(--common-spacing);   
+    gap: var(--common-spacing);
     font-size: 0.85em;
 }
 
@@ -128,7 +128,7 @@ a.see-live-post {
 
 .similar-posts__stats{
     display: flex;
-    gap: var(--commmon-spacing);
+    gap: var(--common-spacing);
     justify-content: space-around;
 }
 

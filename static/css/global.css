@@ -13,7 +13,8 @@
      --clr-p: hsl(0, 0%, 70%);
      --clr-border-neon: rgba(5, 88, 255, .25);
      --truncate-line: 3;
-     --commmon-spacing: 1rem;
+     --common-spacing: 1rem;
+     --common-spacing-half: 0.5rem;
      --clr-link: hsl(231, 95%, 59%);
      --clr-accent: #09a1d9;
      --clr-topic: #f4d03f;
@@ -26,7 +27,7 @@
      background-image: radial-gradient(circle at 35% 50%, rgba(5, 88, 255, .15), transparent 50%), radial-gradient(circle at 65% 50%, rgba(128, 0, 74, .15), transparent 50%), radial-gradient(circle at 50% 65%, rgba(74, 128, 0, .15), transparent 50%);
      color: var(--clr-p);
      font-family: "Poppins";
-     padding: var(--commmon-spacing);
+     padding: var(--common-spacing);
  }
 
  h1,
@@ -71,9 +72,10 @@
      font-weight: 600;
      transition: background-color 0.3s ease;
  }
- .centered-grid{
-    display: grid;
-    place-items: center;
+
+ .centered-grid {
+     display: grid;
+     place-items: center;
  }
 
  .btn--primary {
@@ -83,4 +85,14 @@
 
  .btn:hover {
      background-color: color-mix(in hsl, var(--clr-btn-bg), #000 15%);
+ }
+
+ .hoverable-white {
+     color: var(--clr-p);
+     transition: color 0.3s ease;
+     cursor: pointer;
+ }
+
+ .hoverable-white:hover {
+     color: color-mix(in hsl, var(--clr-p), white 50%)
  }

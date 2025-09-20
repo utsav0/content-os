@@ -8,7 +8,7 @@ main {
     width: min(95vw, 800px);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--commmon-spacing);
+    gap: var(--common-spacing);
 }
 
 button a,
@@ -68,7 +68,7 @@ button a,
     background-color: color-mix(in hsl, var(--clr-bg2), transparent 2%);
     display: grid;
     padding: 2rem;
-    gap: var(--commmon-spacing);
+    gap: var(--common-spacing);
 }
 
 .page-links__button {
