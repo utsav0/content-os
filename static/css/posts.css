@@ -93,7 +93,6 @@ main.data-container {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-decoration: none;
     text-wrap: nowrap;
     padding-right: 1ch;
 }

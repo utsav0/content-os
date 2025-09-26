@@ -25,7 +25,7 @@ const fetchSuggestions = async (query) => {
         data.topics.forEach(topic => {
             const link = document.createElement("a");
             link.href = `/topic/${topic.id}`;
-            link.classList.add("suggestion-item", "suggestion-item--topic");
+            link.classList.add("suggestion-item", "suggestion-item--topic", "nulled-link", "hoverable-white");
             link.textContent = topic.name;
             suggestionsContainer.appendChild(link);
         });
@@ -33,7 +33,7 @@ const fetchSuggestions = async (query) => {
         data.posts.forEach(post => {
             const link = document.createElement("a");
             link.href = `/post/${post.post_id}`;
-            link.classList.add("suggestion-item", "suggestion-item--post");
+            link.classList.add("suggestion-item", "suggestion-item--post", "nulled-link", "hoverable-white");
             link.textContent = post.caption;
             suggestionsContainer.appendChild(link);
         });

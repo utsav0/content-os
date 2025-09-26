@@ -96,3 +96,7 @@
  .hoverable-white:hover {
      color: color-mix(in hsl, var(--clr-p), white 50%)
  }
+
+ .nulled-link{
+    text-decoration: none;
+ }

@@ -94,7 +94,6 @@ button a,
 }
 
 .suggestion-item {
-    text-decoration: none;
     color: color-mix(in hsl, var(--clr-p), transparent 30%);
     height: 1.2lh;
 }

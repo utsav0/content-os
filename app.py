@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 import logging
 from logging.handlers import RotatingFileHandler
+import statistics
 
 # Load environment
 load_dotenv()
@@ -40,9 +41,6 @@ def get_db_connection():
 @app.route("/")
 def home():
     return render_template("home.html")
-@app.route("/post-data")
-def post_data():
-    return render_template("index.html")
 
 @app.route("/posts")
 def posts():
@@ -58,19 +56,7 @@ def posts():
     except mysql.connector.Error as err:
         app.logger.error(f"Database error: {err}")
         return "Database error", 500
-
-@app.route("/api/posts/ids")
-def get_post_ids():
-    try:
-        with get_db_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT post_id FROM posts")
-            ids = [str(row[0]) for row in cursor.fetchall()]
-            return jsonify(ids)
-    except mysql.connector.Error as err:
-        app.logger.error(f"Database error: {err}")
-        return jsonify({"error": "Database error"}), 500
-
+    
 @app.route("/api/posts")
 def api_posts():
     try:
@@ -205,6 +191,75 @@ def show_post_details(post_id):
 
     except mysql.connector.Error as err:
         app.logger.error(f"Database error: {err}")
+        return "Database error", 500
+
+
+@app.route("/topic/<int:topic_id>")
+def show_topic_details(topic_id):
+    try:
+        with get_db_connection() as conn:
+            cursor = conn.cursor(dictionary=True)
+
+            # Fetch topic details
+            cursor.execute("SELECT * FROM topics WHERE id = %s", (topic_id,))
+            topic = cursor.fetchone()
+
+            if not topic:
+                return "Topic not found", 404
+
+            # Fetch all posts for this topic
+            cursor.execute("""
+                SELECT p.*
+                FROM posts p
+                JOIN topic_posts tp ON p.post_id = tp.post_id
+                WHERE tp.topic_id = %s
+                ORDER BY p.post_datetime DESC
+            """, (topic_id,))
+            posts = cursor.fetchall()
+
+            # Fetch relevant topics
+            cursor.execute("""
+                SELECT t.id, t.name, COUNT(t.id) as post_count
+                FROM topics t
+                JOIN topic_posts tp ON t.id = tp.topic_id
+                WHERE tp.post_id IN (
+                    SELECT post_id FROM topic_posts WHERE topic_id = %s
+                ) AND t.id != %s
+                GROUP BY t.id, t.name
+                ORDER BY post_count DESC
+                LIMIT 10
+            """, (topic_id, topic_id))
+            relevant_topics = cursor.fetchall()
+
+            total_posts = len(posts)
+            last_post_date = ""
+            if posts:
+                last_post_date = posts[0]['post_datetime'].strftime('%d %B %Y')
+
+            # Calculate stats
+            likes = [p['likes'] for p in posts if p['likes'] is not None]
+            impressions = [p['impressions'] for p in posts if p['impressions'] is not None]
+            comments = [p['comments'] for p in posts if p['comments'] is not None]
+
+            stats = {
+                'avg_likes': statistics.mean(likes) if likes else 0,
+                'median_likes': statistics.median(likes) if likes else 0,
+                'avg_impressions': statistics.mean(impressions) if impressions else 0,
+                'median_impressions': statistics.median(impressions) if impressions else 0,
+                'avg_comments': statistics.mean(comments) if comments else 0,
+                'median_comments': statistics.median(comments) if comments else 0,
+            }
+
+            return render_template('topic.html',
+                                   topic=topic,
+                                   posts=posts,
+                                   total_posts=total_posts,
+                                   last_post_date=last_post_date,
+                                   stats=stats,
+                                   relevant_topics=relevant_topics)
+
+    except mysql.connector.Error as err:
+        app.logger.error(f"Database error in topic details: {err}")
         return "Database error", 500
     
 

@@ -29,12 +29,12 @@
 
             <div class="extra-details">
                 {% for topic in topics %}
-                <a href="/topic/{{ topic.id }}" class="extra-details__item extra-details__item--topic"><i
+                <a href="/topic/{{ topic.id }}" class="extra-details__item extra-details__item--topic hoverable-white nulled-link"><i
                         class="fa-solid fa-tags"></i>{{ topic.name }}</a>
                 {% endfor %}
                 {% if most_recent_post_info %}
                 <a href="/post/{{ most_recent_post_info.post_id }}"
-                    class="extra-details__item extra-details__item--last-posted"><i class="fa-solid fa-calendar"></i>{{
+                    class="extra-details__item extra-details__item--last-posted hoverable-white nulled-link"><i class="fa-solid fa-calendar"></i>{{
                     most_recent_post_info.post_datetime }}</a>
                 {% endif %}
             </div>
@@ -108,7 +108,7 @@
                     <p class="post__stat-value">{{ post.sends }}</p>
                 </div>
             </div>
-            <a href="{{ post.post_url }}" target="_blank" class="see-live-post">
+            <a href="{{ post.post_url }}" target="_blank" class="see-live-post hoverable-white nulled-link">
                 <button class="btn btn--primary">See Live Post</button>
             </a>
         </section>
@@ -118,7 +118,7 @@
         <h2>Similar Posts</h2>
         <div class="similar-posts">
             {% for similar_post in similar_posts %}
-            <a href="{{ url_for('show_post_details', post_id=similar_post.post_id) }}" class="similar-posts__card">
+            <a href="{{ url_for('show_post_details', post_id=similar_post.post_id) }}" class="similar-posts__card hoverable-white nulled-link">
                 {% if similar_post.media_url and not similar_post.media_url.startswith('http') %}
                 {% set extension = similar_post.media_url.split('.')[-1].lower() %}
                 {% if extension in ['jpg', 'jpeg', 'png', 'gif'] %}

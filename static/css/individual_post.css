@@ -1,8 +1,3 @@
-a {
-    text-decoration: none;
-    color: var(--clr-p);
-}
-
 .container {
     display: grid;
     grid-template-columns: 1fr 300px;
