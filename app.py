@@ -293,6 +293,19 @@ def show_topic_details(topic_id):
         return "Database error", 500
     
 
+@app.route("/api/topics")
+def api_topics():
+    try:
+        with get_db_connection() as conn:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT id, name FROM topics")
+            topics = cursor.fetchall()
+            return jsonify(topics)
+    except mysql.connector.Error as err:
+        app.logger.error(f"Database error: {err}")
+        return jsonify({"error": "Database error"}), 500
+
+
 @app.route("/api/search-suggestions")
 def search_suggestions():
     query = request.args.get("query", "")

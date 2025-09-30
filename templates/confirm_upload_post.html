@@ -27,11 +27,13 @@
             </video>
             {% endif %}
             {% endif %}
+            
 
-            <div class="extra-details">
-                <div class="extra-details__item extra-details__item--topic">
-                    <input type="text" name="tags" placeholder="Enter tags separated by commas">
-                </div>
+            <div class="extra-details extra-details--topic-inp">
+                <div class="extra-details__item extra-details__item--topic tags-input-bar nice-box">
+                <div class="tags-container"></div>
+                <input type="text" name="tags" placeholder="Enter tags separated by commas" class="tags-input-bar__input">
+            </div>
             </div>
             <div class="post-caption">
                 <p>
@@ -112,6 +114,7 @@
     {% else %}
     <h1>No data to display.</h1>
     {% endif %}
+    <script src="{{ url_for('static', filename='js/confirm_upload_post.js') }}"></script>
 </body>
 
 </html>
