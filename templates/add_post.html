@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_post.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Add New Post</h1>
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+        <form action="/add-post" method="post" enctype="multipart/form-data" class="add-post-form">
+            <div class="form-group">
+                <label for="file-upload">Upload Files</label>
+                <input type="file" id="file-upload" name="file-upload" class="form-input" accept=".csv, .xlsx">
+                <div id="file-tags-container"></div>
+            </div>
+            <button type="submit" class="btn btn--primary">Fetch Data</button>
+        </form>
+    </main>
+    <script src="{{ url_for('static', filename='js/add_post.js') }}"></script>
+</body>
+</html>

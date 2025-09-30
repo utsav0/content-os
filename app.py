@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect, url_for, session
 from flask_cors import CORS
 import mysql.connector
 from contextlib import contextmanager
@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 import logging
 from logging.handlers import RotatingFileHandler
 import statistics
+import file_handler
+import sys
+import json
 
 # Load environment
 load_dotenv()
@@ -15,10 +18,14 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+# For session storage
+app.secret_key = os.getenv("SECRET_KEY")
+
 # Logging
-handler = RotatingFileHandler("app.log", maxBytes=100000, backupCount=3)
-handler.setLevel(logging.INFO)
-app.logger.addHandler(handler)
+logging.basicConfig(level=logging.INFO, handlers=[
+    RotatingFileHandler("app.log", maxBytes=100000, backupCount=3),
+    logging.StreamHandler(sys.stdout)
+])
 
 # Database config
 db_config = {
@@ -41,6 +48,29 @@ def get_db_connection():
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/add-post", methods=['GET', 'POST'])
+def add_post():
+    error = None
+    if request.method == 'POST':
+        files = request.files.getlist('file-upload')
+        if not files or not files[0].filename:
+            error = "No file selected."
+        else:
+            result = file_handler.handle_files(files)
+            if isinstance(result, dict): 
+                session['last_upload'] = result 
+                return redirect(url_for('confirm_upload_post'))
+            else:
+                error = result 
+    return render_template("add_post.html", error=error)
+
+@app.route("/confirm-upload-post")
+def confirm_upload_post():
+    data = session.get('last_upload')
+    if not data:
+        return redirect(url_for('add_post'))
+    return render_template("confirm_upload_post.html", data=data)
 
 @app.route("/posts")
 def posts():
@@ -297,7 +327,7 @@ def search_suggestions():
     except mysql.connector.Error as err:
         app.logger.error(f"Database error: {err}")
         return jsonify({"error": "Database error"}), 500
-    
+
 @app.errorhandler(404)
 def not_found(e):
     return jsonify({"error": "Not found"}), 404

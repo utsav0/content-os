@@ -1,0 +1,17 @@
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:21:14] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:21:14] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:21:14] "GET /static/css/confirm_upload_post.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:21:14] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:21:14] "GET /static/media/7375554857304432641.gif HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:46] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:46] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:46] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:46] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:49] "GET /add-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:49] "[36mGET /static/css/add_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:49] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:22:49] "[36mGET /static/js/add_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:23:06] "GET /add-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:23:06] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:23:06] "[36mGET /static/css/add_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:23:06] "[36mGET /static/js/add_post.js HTTP/1.1[0m" 304 -

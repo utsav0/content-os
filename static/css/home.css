@@ -25,6 +25,7 @@ button a,
 .page-links {
     display: grid;
     grid-template-columns: subgrid;
+    gap: 20px;
 }
 
 .search-bar {
