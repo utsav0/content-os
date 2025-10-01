@@ -357,7 +357,6 @@ def save_post():
 
             try:
                 # Prepare post data
-                post_data['post_url'] = f"/post/{post_data['post_id']}"
                 post_columns = [key for key in post_data.keys() if key != 'media_url']
                 post_values = [post_data[key] for key in post_columns]
                 

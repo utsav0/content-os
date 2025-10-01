@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/add_post.css') }}">
 </head>
 <body>
+    {% include 'navbar.html' %}
     <main>
         <h1>Add New Post</h1>
         {% if error %}

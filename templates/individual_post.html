@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    {% include 'navbar.html' %}
     {% if post %}
     <main class="container">
         <section class="container__section section--left">
@@ -70,6 +71,16 @@
                 <div class="post__stat">
                     <p class="post__stat-label">Total Clicks:</p>
                     <p class="post__stat-value">{{ post.total_clicks }}</p>
+                </div>
+                <div class="post__stat">
+                    <p class="post__stat-label">CTR:</p>
+                    <p class="post__stat-value">
+                        {% if post.impressions and post.main_ebook_clicks and post.impressions > 0 %}
+                        {{ "%.2f"|format((post.main_ebook_clicks / post.impressions) * 100) }}%
+                        {% else %}
+                        -
+                        {% endif %}
+                    </p>
                 </div>
                 <div class="post__stat">
                     <p class="post__stat-label">Main Ebook Clicks:</p>

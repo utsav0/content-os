@@ -36,6 +36,9 @@ main.data-container {
     gap: var(--common-spacing);
     justify-items: stretch;
 }
+.filter-form::backdrop{
+    filter: blur(5px);
+}
 
 .filter-form__row {
     display: grid;
