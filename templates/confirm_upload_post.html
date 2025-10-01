@@ -114,6 +114,9 @@
     {% else %}
     <h1>No data to display.</h1>
     {% endif %}
+    <script>
+        const postData = {{ data | tojson }};
+    </script>
     <script src="{{ url_for('static', filename='js/confirm_upload_post.js') }}"></script>
 </body>
 

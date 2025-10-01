@@ -178,3 +178,214 @@ INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:59:34] "GET /static/media/7375554857
 INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:59:34] "GET /static/js/confirm_upload_post.js HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:59:34] "GET /api/topics HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 21:59:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:46] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:46] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:46] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:46] "GET /static/js/confirm_upload_post.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:46] "GET /static/css/confirm_upload_post.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:47] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:48] "GET /api/topics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:05:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in '/home/utsav/Desktop/Content/Data & Analysis/Content OS/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-342-635
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:45] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:46] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:46] "[36mGET /static/css/confirm_upload_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:46] "GET /static/js/confirm_upload_post.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:46] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:46] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:47] "GET /api/topics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:54] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:54] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:54] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:54] "[36mGET /static/js/confirm_upload_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:54] "[36mGET /static/css/confirm_upload_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:55] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:08:55] "GET /api/topics HTTP/1.1" 200 -
+ERROR:app:Database transaction error: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`linkedin_posts`.`topic_posts`, CONSTRAINT `topic_posts_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE)
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:09:35] "[35m[1mPOST /api/save-post HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/utsav/Desktop/Content/Data & Analysis/Content OS/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-342-635
+ERROR:app:Database transaction error: 1364 (HY000): Field 'post_id' doesn't have a default value
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:10:55] "[35m[1mPOST /api/save-post HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/utsav/Desktop/Content/Data & Analysis/Content OS/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-342-635
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:51] "[35m[1mPOST /api/save-post HTTP/1.1[0m" 201 -
+INFO:app:Request received for post ID: 7375554857304432641
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:52] "GET /post/7375554857304432641 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:53] "GET /static/media/7372290798471741440.gif HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:53] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:53] "[36mGET /static/js/individual_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:53] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:12:53] "GET /static/media/7345474956534665222.gif HTTP/1.1" 200 -
+INFO:app:Request received for post ID: 7375554857304432641
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:15] "GET /post/7375554857304432641 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:16] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:16] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:16] "[36mGET /static/media/7372290798471741440.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:16] "[36mGET /static/media/7345474956534665222.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:16] "[36mGET /static/js/individual_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:16] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:25] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:35] "GET /topic/500 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:35] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:35] "[36mGET /static/css/topic.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:50] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:50] "[36mGET /static/media/7345474956534665222.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:13:50] "[36mGET /static/media/7372290798471741440.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:26] "GET /add-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:26] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:26] "[36mGET /static/css/add_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:26] "[36mGET /static/js/add_post.js HTTP/1.1[0m" 304 -
+INFO:app:{
+  "post_id": "7375554857304432641",
+  "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7375554857304432641",
+  "media_url": "7375554857304432641.gif",
+  "caption": "How to Show Product Color Variants 🎨\n\n(Only with CSS, No JS)\n\nHave you seen those cards where you pick a color and the product image changes?\n\nMost people think you need JavaScript for that. But CSS alone can do it.\n\nFollow these steps:\n\nFirst, we add a label with a hidden radio button and a color circle inside it:\n\n<label>\n   <input type=\"radio\" name=\"color\" value=\"pink\">\n   <div class=\"color pink\"></div>\n</label>\n\nThe radio is hidden but still works when you click the circle. That’s what makes the circle “selectable.”\n\nNext, we add the product image holder:\n\n<div class=\"product-img\"></div>\n\nWe’ll set its background with CSS.\n\nNow here’s the magic. We connect the radio button to the product image using the :has() selector:\n\n.card:has(input[value=\"pink\"]:checked) .product-img {\n   background-image: url(\"\nshirt-pink.png\n\");\n}\n\nThat means: if the card has an input with value pink that’s checked, then show the pink shirt image.\n\nDo the same for other colors. And because all radios share the same name, picking one color unselects the others.\n\nAnd that’s it. Pure CSS color switching. No hacks. No JavaScript.\n\nAnyways,\n\nTricks like this are fun. But layouts are where most people struggle. One design, 25 screen sizes… feels like throw and pray.\n\nFlexbox and Grid fix that. I wrote a 112-page visual guide that shows you how. You can finish it in an afternoon. Grab it here:\n\n[\nhttps://lnkd.in/gs7F-e9R\n]",
+  "post_datetime": "2025-09-21 15:41:00",
+  "likes": 259,
+  "comments": 10,
+  "impressions": 12162,
+  "members_reached": 7163,
+  "total_clicks": 89,
+  "main_ebook_clicks": 89,
+  "lead_magnet_clicks": 0,
+  "profile_viewers": 45,
+  "followers_gained": 10,
+  "reactions": 259,
+  "reposts": 30,
+  "saves": 162,
+  "sends": 12
+}
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:38] "[32mPOST /add-post HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:38] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:39] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:39] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:39] "[36mGET /static/css/confirm_upload_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:39] "[36mGET /static/js/confirm_upload_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:39] "GET /static/media/7375554857304432641.gif HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:40] "GET /api/topics HTTP/1.1" 200 -
+ERROR:app:Database transaction error: 1062 (23000): Duplicate entry '7375554857304432641' for key 'posts.PRIMARY'
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:14:46] "[35m[1mPOST /api/save-post HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:08] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:08] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:08] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:08] "[36mGET /static/css/confirm_upload_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:12] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:13] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:13] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:13] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:15] "GET /api/search-suggestions?query=a HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:16] "GET /api/search-suggestions?query=at HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:17] "GET /api/search-suggestions?query=attr HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:17] "GET /api/search-suggestions?query=attr( HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:17] "GET /api/search-suggestions?query=attr() HTTP/1.1" 200 -
+INFO:app:Request received for post ID: 7375554857304432641
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:26] "GET /post/7375554857304432641 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:26] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:26] "[36mGET /static/js/individual_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:26] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:26] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:27] "[36mGET /static/media/7345474956534665222.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:27] "[36mGET /static/media/7372290798471741440.gif HTTP/1.1[0m" 304 -
+INFO:app:Request received for post ID: 7375554857304432641
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "GET /post/7375554857304432641 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "[36mGET /static/js/individual_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "[36mGET /static/media/7372290798471741440.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2025 22:15:36] "[36mGET /static/media/7345474956534665222.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 139-342-635
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:10:51] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:10:52] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:10:52] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:10:52] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:12] "GET /posts HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:13] "GET /static/css/posts.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:13] "GET /static/js/posts.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:13] "GET /static/css/global.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:14] "GET /api/posts?offset=0&limit=20&sort_by=post_datetime&sort_order=desc HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:20] "GET /api/posts?offset=0&limit=20&sort_by=post_datetime&sort_order=asc HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:12:24] "GET /api/posts?offset=0&limit=20&sort_by=post_datetime&sort_order=desc HTTP/1.1" 200 -
+INFO:app:Request received for post ID: 7372290798471741440
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:25] "GET /post/7372290798471741440 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:25] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:25] "GET /static/css/individual_post.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:25] "[36mGET /static/media/7372290798471741440.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:25] "[36mGET /static/media/7375554857304432641.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:25] "GET /static/js/individual_post.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:13:26] "[36mGET /static/media/7345474956534665222.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:18:57] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:18:58] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:18:58] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:18:58] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:01] "GET /add-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:01] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:01] "[36mGET /static/css/add_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:01] "[36mGET /static/js/add_post.js HTTP/1.1[0m" 304 -
+INFO:app:{
+  "post_id": "7372641660624695297",
+  "post_url": "https://www.linkedin.com/feed/update/urn:li:share:7372641660624695297",
+  "media_url": "7372641660624695297.gif",
+  "caption": "How to create a pop-up without JS 🎯\n\n(Well, barely even any CSS):\n\nI usually yell about CSS like it’s my holy book. But this time? Totally different. The new popover API lets you make real popups with just one tiny attribute.\n\nHere’s the magic:\n\nOnly two things you need:\n\n<button popovertarget=\"deletepopup\">Delete</button>\n\n<div id=\"deletepopup\" popover> ... </div>\n\n✅ popovertarget = tells the browser which pop-up to show\n\n✅ popover = makes the div a pop-up\n\nThat's it. Done. It hides by default, then pops up when you click. Easy peasy lemon squeezy.\n\nWant to close it?\n\nJust do this on your cancel button:\n\n<button popovertarget=\"deletepopup\" popovertargetaction=\"hide\">\n\nSame deal, but now it’s a “hide” move instead of “show.”\n\nWanna style the background?\n\nUse ::backdrop to add a dim or blur:\n\n.deleteopup::backdrop {\n\n background: rgba(0, 0, 0, 0.6);\n\n backdrop-filter: blur(2px);\n\n}\n\nWeird quirk alert 🚨:\n\nIf you slap display: flex on your popup, it breaks.\n\nProbably because the browser is secretly using display: none to hide it, and flex gets cranky about that. Just my guess.\n\nBut overall, this thing rocks. It’s clean, it’s simple, and it already has a browser support of 87%.\n\nGo play with it.\n\nAnd hey, if you discover something new, tell me.\n\nPS: Want to become a boss at modern layouts? I wrote a full ebook on flexbox and grid. Grab it here 👉 [\nhttps://lnkd.in/gJQ-Q979\n]",
+  "post_datetime": "2025-09-13 14:45:00",
+  "likes": 373,
+  "comments": 25,
+  "impressions": 38792,
+  "members_reached": 25038,
+  "total_clicks": 44,
+  "main_ebook_clicks": 43,
+  "lead_magnet_clicks": 0,
+  "profile_viewers": 69,
+  "followers_gained": 33,
+  "reactions": 373,
+  "reposts": 49,
+  "saves": 289,
+  "sends": 24
+}
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:35] "[32mPOST /add-post HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:35] "GET /confirm-upload-post HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:36] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:36] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:36] "[36mGET /static/css/confirm_upload_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:36] "GET /static/media/7372641660624695297.gif HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:36] "[36mGET /static/js/confirm_upload_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:19:36] "GET /api/topics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:18] "[35m[1mPOST /api/save-post HTTP/1.1[0m" 201 -
+INFO:app:Request received for post ID: 7372641660624695297
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:18] "GET /post/7372641660624695297 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:19] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:19] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:19] "GET /static/media/7336264370244489216.gif HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:19] "[36mGET /static/js/individual_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:19] "[36mGET /static/media/7372641660624695297.gif HTTP/1.1[0m" 304 -
+INFO:app:Request received for post ID: 7372641660624695297
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:48] "GET /post/7372641660624695297 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:49] "[36mGET /static/css/individual_post.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:49] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:49] "[36mGET /static/js/individual_post.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:49] "[36mGET /static/media/7372641660624695297.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:20:49] "[36mGET /static/media/7336264370244489216.gif HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:00] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:00] "[36mGET /static/css/home.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:00] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:02] "GET /posts HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:02] "[36mGET /static/css/global.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:02] "[36mGET /static/css/posts.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:02] "[36mGET /static/js/posts.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [01/Oct/2025 14:21:03] "GET /api/posts?offset=0&limit=20&sort_by=post_datetime&sort_order=desc HTTP/1.1" 200 -

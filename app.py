@@ -341,6 +341,63 @@ def search_suggestions():
         app.logger.error(f"Database error: {err}")
         return jsonify({"error": "Database error"}), 500
 
+@app.route("/api/save-post", methods=['POST'])
+def save_post():
+    data = request.get_json()
+    post_data = data.get('post_data')
+    tags = data.get('tags')
+
+    if not post_data or not tags:
+        return jsonify({"error": "Missing data"}), 400
+
+    try:
+        with get_db_connection() as conn:
+            cursor = conn.cursor()
+            conn.start_transaction()
+
+            try:
+                # Prepare post data
+                post_data['post_url'] = f"/post/{post_data['post_id']}"
+                post_columns = [key for key in post_data.keys() if key != 'media_url']
+                post_values = [post_data[key] for key in post_columns]
+                
+                # Handle media_url separately
+                if 'media_url' in post_data and post_data['media_url']:
+                    post_columns.append('media_url')
+                    post_values.append(post_data['media_url'])
+
+                query = f"INSERT INTO posts ({', '.join(post_columns)}) VALUES ({', '.join(['%s'] * len(post_columns))})"
+                cursor.execute(query, post_values)
+                post_id = post_data['post_id']
+
+                # Handle topics
+                topic_ids = []
+                for tag in tags:
+                    cursor.execute("SELECT id FROM topics WHERE name = %s", (tag,))
+                    result = cursor.fetchone()
+                    if result:
+                        topic_ids.append(result[0])
+                    else:
+                        cursor.execute("INSERT INTO topics (name) VALUES (%s)", (tag,))
+                        topic_ids.append(cursor.lastrowid)
+
+                # Associate topics with post
+                for topic_id in topic_ids:
+                    cursor.execute("INSERT INTO topic_posts (post_id, topic_id) VALUES (%s, %s)", (post_id, topic_id))
+
+                conn.commit()
+                return jsonify({"success": True, "post_id": post_id}), 201
+
+            except mysql.connector.Error as err:
+                conn.rollback()
+                app.logger.error(f"Database transaction error: {err}")
+                return jsonify({"error": "Database error during transaction"}), 500
+
+    except mysql.connector.Error as err:
+        app.logger.error(f"Database connection error: {err}")
+        return jsonify({"error": "Database connection error"}), 500
+
+
 @app.errorhandler(404)
 def not_found(e):
     return jsonify({"error": "Not found"}), 404

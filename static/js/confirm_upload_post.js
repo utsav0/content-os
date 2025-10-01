@@ -3,6 +3,7 @@ const suggestionsContainer = document.createElement('div');
 suggestionsContainer.classList.add('tags-input-bar__search-suggestions');
 tagsInput.parentNode.appendChild(suggestionsContainer);
 const tagsContainer = document.querySelector('.tags-container');
+const saveButton = document.querySelector('.btn--primary');
 
 let allTopics = [];
 let tags = [];
@@ -33,7 +34,7 @@ function renderTags() {
     tagsContainer.innerHTML = '';
     tags.forEach(tag => {
         const tagElement = document.createElement('div');
-        tagElement.classList.add('tag', 'btn', 'btn--secondary');
+        tagElement.classList.add('tag');
         tagElement.innerHTML = `
             <span>${tag}</span>
             <button type="button" class="tag__remove-btn" data-tag="${tag}">&times;</button>
@@ -56,7 +57,6 @@ function addTag(tag) {
     if (tag && !tags.includes(tag)) {
         tags.push(tag);
         renderTags();
-        
     }
     tagsInput.value = '';
     suggestionsContainer.innerHTML = '';
@@ -89,6 +89,39 @@ tagsInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         addTag(tagsInput.value.trim());
+    }
+});
+
+saveButton.addEventListener('click', async () => {
+    if (tags.length === 0) {
+        alert('Please add at least one tag.');
+        return;
+    }
+
+    const data = {
+        post_data: postData,
+        tags: tags
+    };
+
+    try {
+        const response = await fetch('/api/save-post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            window.location.href = `/post/${result.post_id}`;
+        } else {
+            alert(`Error: ${result.error}`);
+        }
+    } catch (err) {
+        console.error('Error saving post:', err);
+        alert('An error occurred while saving the post.');
     }
 });
 
